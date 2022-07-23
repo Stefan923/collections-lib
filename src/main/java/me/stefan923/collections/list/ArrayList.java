@@ -1,8 +1,8 @@
 package me.stefan923.collections.list;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class ArrayList<E extends Comparable<E>> implements List<E> {
@@ -72,23 +72,29 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
     }
 
     @Override
-    public E[] findAll(Predicate<E> predicate) {
-        return (E[]) Arrays.stream(elements).map(e -> (E) e).filter(predicate::test).toArray();
+    public Object[] findAll(Predicate<E> predicate) {
+        return Arrays.stream(elements).map(e -> (E) e).filter(predicate::test).toArray();
     }
 
     @Override
-    public boolean exists(Predicate<E> predicate) {
+    public boolean has(E element) {
+        for (int i = 0; i < size; ++i) {
+            if (elements[i].equals(element)) {
+                return true;
+            }
+        }
         return false;
-    }
-
-    @Override
-    public List<E> sort(Function<E, Integer> function) {
-        return null;
     }
 
     @Override
     public Object[] toArray() {
         return Arrays.copyOf(elements, size);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void sort(Comparator<? super E> comparator) {
+        Arrays.sort((E[]) elements, 0, size, comparator);
     }
 
     private void ensureCapacity(int minCapacity) {
