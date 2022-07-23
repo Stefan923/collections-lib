@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class ArrayList<E extends Comparable<E>> implements List<E> {
+public class ArrayList<E> implements List<E> {
 
     private static final int MAX_ARRAY_CAPACITY = Integer.MAX_VALUE - 8;
 
