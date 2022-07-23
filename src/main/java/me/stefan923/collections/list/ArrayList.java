@@ -26,11 +26,13 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public E add(E element) {
+    public boolean add(E element) {
         ensureCapacity(size + 1);
-        elements[size++] = element;
-
-        return element;
+        if (size < elements.length) {
+            elements[size++] = element;
+            return true;
+        }
+        return false;
     }
 
     @Override
