@@ -9,8 +9,8 @@ public interface Collection<E> {
     boolean remove(E element);
     Optional<E> findFirst(Predicate<E> predicate);
     Optional<E> findLast(Predicate<E> predicate);
-    E[] findAll(Predicate<E> predicate);
-    boolean exists(Predicate<E> predicate);
+    Object[] findAll(Predicate<E> predicate);
+    boolean has(E element);
     Object[] toArray();
 
 }
