@@ -52,6 +52,11 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
     public Optional<E> findFirst(Predicate<E> predicate) {
         for (Object element : elements) {
             E elementToTest = (E) element;

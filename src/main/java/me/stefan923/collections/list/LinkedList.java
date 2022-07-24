@@ -65,6 +65,11 @@ public class LinkedList<E> implements List<E> {
     }
 
     @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
     public Optional<E> findFirst(Predicate<E> predicate) {
         LinkedListNode<E> currentElement = head;
         while (currentElement != null) {
