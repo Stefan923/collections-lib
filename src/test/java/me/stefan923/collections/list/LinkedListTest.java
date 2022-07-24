@@ -100,7 +100,7 @@ public class LinkedListTest {
     @Test
     public void testSort_whenListHasMoreThanOneElement() {
         Integer[] expected = new Integer[]{ 10, 30, 40, 60, 70, 100 };
-        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 30, 10, 60, 40, 70, 100 });
 
         integers.sort(Integer::compareTo);
         Integer[] actual = Arrays.stream(integers.toArray()).toArray(Integer[]::new);

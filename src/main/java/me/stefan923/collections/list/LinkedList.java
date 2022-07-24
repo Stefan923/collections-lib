@@ -142,12 +142,11 @@ public class LinkedList<E> implements List<E> {
         }
 
         LinkedListNode<E> sortedListHead = head;
-        LinkedListNode<E> sortedListTail = head;
         LinkedListNode<E> currentElement = head.next;
         sortedListHead.next = null;
         while (currentElement != null) {
             LinkedListNode<E> nextElement = currentElement.next;
-            sortedInsert(sortedListHead, sortedListTail, currentElement, comparator);
+            sortedListHead = sortedInsert(sortedListHead, currentElement, comparator);
             currentElement = nextElement;
         }
 
@@ -159,16 +158,14 @@ public class LinkedList<E> implements List<E> {
         tail = currentElement;
     }
 
-    private void sortedInsert(LinkedListNode<E> head, LinkedListNode<E> tail,
-                              LinkedListNode<E> newElement, Comparator<? super E> comparator) {
+    private LinkedListNode<E> sortedInsert(LinkedListNode<E> head, LinkedListNode<E> newElement,
+                                           Comparator<? super E> comparator) {
         LinkedListNode<E> currentNode = head;
         LinkedListNode<E> previousNode = null;
 
         if (currentNode == null) {
-            head = tail = newElement;
-            head.next = null;
-
-            return;
+            newElement.next = null;
+            return newElement;
         }
 
         while (currentNode != null) {
@@ -177,14 +174,15 @@ public class LinkedList<E> implements List<E> {
                     previousNode.next = newElement;
                 }
                 newElement.next = currentNode;
-                return;
+                return (head == currentNode) ? newElement : head;
             }
             previousNode = currentNode;
             currentNode = currentNode.next;
         }
 
-        previousNode.next = tail = newElement;
+        previousNode.next = newElement;
         newElement.next = null;
+        return head;
     }
 
     private static class LinkedListNode<T> {
