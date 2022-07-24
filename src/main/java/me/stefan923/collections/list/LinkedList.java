@@ -136,32 +136,38 @@ public class LinkedList<E> implements List<E> {
             return;
         }
 
-        LinkedListNode<E> sortedList = head;
+        LinkedListNode<E> sortedListHead = head;
+        LinkedListNode<E> sortedListTail = head;
         LinkedListNode<E> currentElement = head.next;
-        sortedList.next = null;
+        sortedListHead.next = null;
         while (currentElement != null) {
             LinkedListNode<E> nextElement = currentElement.next;
-            sortedInsert(sortedList, currentElement, comparator);
+            sortedInsert(sortedListHead, sortedListTail, currentElement, comparator);
             currentElement = nextElement;
         }
 
-        head = sortedList;
+        head = sortedListHead;
+        currentElement = sortedListHead;
+        while (currentElement.next != null) {
+            currentElement = currentElement.next;
+        }
+        tail = currentElement;
     }
 
-    private void sortedInsert(LinkedListNode<E> head, LinkedListNode<E> newElement, Comparator<? super E> comparator) {
+    private void sortedInsert(LinkedListNode<E> head, LinkedListNode<E> tail,
+                              LinkedListNode<E> newElement, Comparator<? super E> comparator) {
         LinkedListNode<E> currentNode = head;
         LinkedListNode<E> previousNode = null;
 
         if (currentNode == null) {
-            currentNode = newElement;
-            currentNode.next = null;
+            head = tail = newElement;
+            head.next = null;
 
             return;
         }
 
         while (currentNode != null) {
             if (comparator.compare(newElement.key, currentNode.key) < 0) {
-                System.out.println(currentNode.key + " " + newElement.key);
                 if (previousNode != null) {
                     previousNode.next = newElement;
                 }
@@ -172,7 +178,7 @@ public class LinkedList<E> implements List<E> {
             currentNode = currentNode.next;
         }
 
-        previousNode.next = newElement;
+        previousNode.next = tail = newElement;
         newElement.next = null;
     }
 
