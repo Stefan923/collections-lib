@@ -12,7 +12,7 @@ public class LinkedListTest {
     @Test
     public void testAdd() {
         Integer[] expected = new Integer[]{ 10, 20, 40, 30 };
-        LinkedList<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
+        List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
 
         list.add(30);
         Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
@@ -23,7 +23,7 @@ public class LinkedListTest {
     @Test
     public void testRemove() {
         Integer[] expected = new Integer[]{ 10, 40 };
-        LinkedList<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
+        List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
 
         list.remove(20);
         Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
@@ -32,9 +32,19 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testSize() {
+        int expected = 6;
+        List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 70, 40, 30, 15 });
+
+        int actual = list.size();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testFindFirst() {
         int expected = 60;
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         int actual = integers.findFirst(e -> e > 50).orElse(0);
 
@@ -44,7 +54,7 @@ public class LinkedListTest {
     @Test
     public void testFindLast() {
         int expected = 100;
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         int actual = integers.findLast(e -> e > 50).orElse(0);
 
@@ -54,7 +64,7 @@ public class LinkedListTest {
     @Test
     public void testFindAll() {
         Integer[] expected = new Integer[]{ 60, 70, 100 };
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         Integer[] actual = Arrays.stream(integers.findAll(e -> e > 50)).toArray(Integer[]::new);
 
@@ -63,7 +73,7 @@ public class LinkedListTest {
 
     @Test
     public void testHas_whenTrue() {
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         boolean actual = integers.has(60);
 
@@ -72,7 +82,7 @@ public class LinkedListTest {
 
     @Test
     public void testHas_whenFalse() {
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         boolean actual = integers.has(50);
 
@@ -90,7 +100,7 @@ public class LinkedListTest {
     @Test
     public void testSort_whenListHasMoreThanOneElement() {
         Integer[] expected = new Integer[]{ 10, 30, 40, 60, 70, 100 };
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 
         integers.sort(Integer::compareTo);
         Integer[] actual = Arrays.stream(integers.toArray()).toArray(Integer[]::new);
@@ -101,7 +111,7 @@ public class LinkedListTest {
     @Test
     public void testSort_whenListHasOneElement() {
         Integer[] expected = new Integer[]{ 10 };
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{ 10 });
+        List<Integer> integers = new LinkedList<>(new Integer[]{ 10 });
 
         integers.sort(Integer::compareTo);
         Integer[] actual = Arrays.stream(integers.toArray()).toArray(Integer[]::new);
@@ -112,7 +122,7 @@ public class LinkedListTest {
     @Test
     public void testSort_whenListIsEmpty() {
         Integer[] expected = new Integer[]{};
-        LinkedList<Integer> integers = new LinkedList<>(new Integer[]{});
+        List<Integer> integers = new LinkedList<>(new Integer[]{});
 
         integers.sort(Integer::compareTo);
         Integer[] actual = Arrays.stream(integers.toArray()).toArray(Integer[]::new);
