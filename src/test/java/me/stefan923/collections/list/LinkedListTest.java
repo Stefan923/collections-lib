@@ -21,6 +21,18 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testAddAll() {
+        Integer[] expected = new Integer[]{ 10, 20, 40, 30, 70, 15, 100 };
+        List<Integer> list1 = new LinkedList<>(new Integer[]{ 10, 20, 40 });
+        List<Integer> list2 = new LinkedList<>(new Integer[]{ 30, 70, 15, 100 });
+
+        list1.addAll(list2);
+        Integer[] actual = Arrays.stream(list1.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testRemove() {
         Integer[] expected = new Integer[]{ 10, 40 };
         List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
