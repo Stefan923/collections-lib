@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 public interface Collection<E> {
 
     boolean add(E element);
+    boolean addAll(Collection<E> collection);
     boolean remove(E element);
     int size();
     Optional<E> findFirst(Predicate<E> predicate);

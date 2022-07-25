@@ -1,5 +1,7 @@
 package me.stefan923.collections.list;
 
+import me.stefan923.collections.Collection;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
@@ -33,6 +35,16 @@ public class ArrayList<E> implements List<E> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<E> collection) {
+        for (Object element : collection.toArray()) {
+            if (!add((E) element)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
