@@ -76,6 +76,20 @@ public class DoublyLinkedList<E> implements List<E> {
     }
 
     @Override
+    public void clear() {
+        Node<E> currentNode = head;
+        Node<E> nextNode;
+        while (currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.previous = null;
+            currentNode.next = null;
+            currentNode = nextNode;
+        }
+        head = tail = null;
+        size = 0;
+    }
+
+    @Override
     public int size() {
         return size;
     }

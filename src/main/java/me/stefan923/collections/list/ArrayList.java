@@ -64,6 +64,12 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
+    public void clear() {
+        elements = new Object[DEFAULT_SIZE];
+        size = 0;
+    }
+
+    @Override
     public int size() {
         return size;
     }
