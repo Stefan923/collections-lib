@@ -8,6 +8,7 @@ public interface Collection<E> {
     boolean add(E element);
     boolean addAll(Collection<E> collection);
     boolean remove(E element);
+    void clear();
     int size();
     Optional<E> findFirst(Predicate<E> predicate);
     Optional<E> findLast(Predicate<E> predicate);

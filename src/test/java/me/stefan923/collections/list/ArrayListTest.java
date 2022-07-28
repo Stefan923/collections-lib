@@ -14,7 +14,7 @@ public class ArrayListTest {
         List<Integer> list = new ArrayList<>(new Integer[]{ 10, 20, 40 });
 
         list.add(30);
-        Integer[] actual = (Integer[]) list.toArray();
+        Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
 
         assertArrayEquals(expected, actual);
     }
@@ -26,7 +26,7 @@ public class ArrayListTest {
         List<Integer> list2 = new ArrayList<>(new Integer[]{ 30, 70, 15, 100 });
 
         list1.addAll(list2);
-        Integer[] actual = (Integer[]) list1.toArray();
+        Integer[] actual = Arrays.stream(list1.toArray()).toArray(Integer[]::new);
 
         assertArrayEquals(expected, actual);
     }
@@ -37,7 +37,18 @@ public class ArrayListTest {
         List<Integer> list = new ArrayList<>(new Integer[]{ 10, 20, 40 });
 
         list.remove(20);
-        Integer[] actual = (Integer[]) list.toArray();
+        Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testClear() {
+        Integer[] expected = new Integer[]{};
+        List<Integer> list = new ArrayList<>(new Integer[]{ 10, 20, 40 });
+
+        list.clear();
+        Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
 
         assertArrayEquals(expected, actual);
     }
@@ -103,7 +114,7 @@ public class ArrayListTest {
     @Test
     public void testToArray() {
         Integer[] expected = new Integer[]{ 10, 20, 30 };
-        Integer[] actual = (Integer[]) new ArrayList<>(new Integer[]{ 10, 20, 30 }).toArray();
+        Integer[] actual = Arrays.stream(new ArrayList<>(new Integer[]{ 10, 20, 30 }).toArray()).toArray(Integer[]::new);
 
         assertArrayEquals(expected, actual);
     }
