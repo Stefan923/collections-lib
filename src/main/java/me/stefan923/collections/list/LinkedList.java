@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 
 public class LinkedList<E> implements List<E> {
 
-    private LinkedListNode<E> head;
-    private LinkedListNode<E> tail;
+    private Node<E> head;
+    private Node<E> tail;
 
     private int size;
 
@@ -30,17 +30,30 @@ public class LinkedList<E> implements List<E> {
     @Override
     public boolean add(E element) {
         if (head == null) {
-            head = tail = new LinkedListNode<>(element);
+            head = tail = new Node<>(element);
             ++size;
             return true;
         }
 
-        LinkedListNode<E> newElement = new LinkedListNode<>(element);
+        Node<E> newElement = new Node<>(element);
         tail.next = newElement;
         tail = newElement;
         ++size;
 
         return true;
+    }
+
+    @Override
+    public void clear() {
+        Node<E> currentNode = head;
+        Node<E> nextNode;
+        while (currentNode != null) {
+            nextNode = currentNode.next;
+            currentNode.next = null;
+            currentNode = nextNode;
+        }
+        head = tail = null;
+        size = 0;
     }
 
     @Override
@@ -55,8 +68,8 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(E element) {
-        LinkedListNode<E> previousElement = null;
-        LinkedListNode<E> currentElement = head;
+        Node<E> previousElement = null;
+        Node<E> currentElement = head;
         while (currentElement != null) {
             if (currentElement.key.equals(element)) {
                 if (previousElement == null) {
@@ -83,7 +96,7 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public Optional<E> findFirst(Predicate<E> predicate) {
-        LinkedListNode<E> currentElement = head;
+        Node<E> currentElement = head;
         while (currentElement != null) {
             if (predicate.test(currentElement.key)) {
                 return Optional.of(currentElement.key);
@@ -95,7 +108,7 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public Optional<E> findLast(Predicate<E> predicate) {
-        LinkedListNode<E> currentElement = head;
+        Node<E> currentElement = head;
         E latestElementFound = null;
         while (currentElement != null) {
             if (predicate.test(currentElement.key)) {
@@ -111,7 +124,7 @@ public class LinkedList<E> implements List<E> {
         Object[] foundElements = new Object[size];
         int index = 0;
 
-        LinkedListNode<E> currentElement = head;
+        Node<E> currentElement = head;
         while (currentElement != null) {
             if (predicate.test(currentElement.key)) {
                 foundElements[index++] = currentElement.key;
@@ -123,7 +136,7 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public boolean has(E element) {
-        LinkedListNode<E> currentElement = head;
+        Node<E> currentElement = head;
         while (currentElement != null) {
             if (currentElement.key.equals(element)) {
                 return true;
@@ -138,7 +151,7 @@ public class LinkedList<E> implements List<E> {
         Object[] elements = new Object[size];
         int index = 0;
 
-        LinkedListNode<E> currentElement = head;
+        Node<E> currentElement = head;
         while (currentElement != null) {
             elements[index++] = currentElement.key;
             currentElement = currentElement.next;
@@ -153,11 +166,11 @@ public class LinkedList<E> implements List<E> {
             return;
         }
 
-        LinkedListNode<E> sortedListHead = head;
-        LinkedListNode<E> currentElement = head.next;
+        Node<E> sortedListHead = head;
+        Node<E> currentElement = head.next;
         sortedListHead.next = null;
         while (currentElement != null) {
-            LinkedListNode<E> nextElement = currentElement.next;
+            Node<E> nextElement = currentElement.next;
             sortedListHead = sortedInsert(sortedListHead, currentElement, comparator);
             currentElement = nextElement;
         }
@@ -170,10 +183,10 @@ public class LinkedList<E> implements List<E> {
         tail = currentElement;
     }
 
-    private LinkedListNode<E> sortedInsert(LinkedListNode<E> head, LinkedListNode<E> newElement,
-                                           Comparator<? super E> comparator) {
-        LinkedListNode<E> currentNode = head;
-        LinkedListNode<E> previousNode = null;
+    private Node<E> sortedInsert(Node<E> head, Node<E> newElement,
+                                 Comparator<? super E> comparator) {
+        Node<E> currentNode = head;
+        Node<E> previousNode = null;
 
         if (currentNode == null) {
             newElement.next = null;
@@ -197,12 +210,12 @@ public class LinkedList<E> implements List<E> {
         return head;
     }
 
-    private static class LinkedListNode<T> {
+    private static class Node<T> {
 
         private final T key;
-        private LinkedListNode<T> next;
+        private Node<T> next;
 
-        public LinkedListNode(T key) {
+        public Node(T key) {
             this.key = key;
             this.next = null;
         }

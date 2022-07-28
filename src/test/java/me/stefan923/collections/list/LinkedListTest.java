@@ -44,6 +44,17 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testClear() {
+        Integer[] expected = new Integer[]{};
+        List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 40 });
+
+        list.clear();
+        Integer[] actual = Arrays.stream(list.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testSize() {
         int expected = 6;
         List<Integer> list = new LinkedList<>(new Integer[]{ 10, 20, 70, 40, 30, 15 });
