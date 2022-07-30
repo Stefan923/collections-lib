@@ -3,6 +3,9 @@ package me.stefan923.collections.tree;
 import me.stefan923.collections.Collection;
 
 import java.util.Optional;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.function.Predicate;
 
 public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
@@ -34,15 +37,15 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
         Node<E> currentNode = root;
         while (true) {
-            if (currentNode.key.compareTo(element) <= 0) {
+            if (currentNode.key.compareTo(element) > 0) {
                 if (currentNode.left == null) {
-                    currentNode.left = root;
+                    currentNode.left = newNode;
                     break;
                 }
                 currentNode = currentNode.left;
             } else {
                 if (currentNode.right == null) {
-                    currentNode.right = root;
+                    currentNode.right = newNode;
                     break;
                 }
                 currentNode = currentNode.right;
@@ -65,7 +68,7 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public void clear() {
-        
+
     }
 
     @Override
@@ -95,12 +98,38 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return computeTraversal(TraversalType.INORDER);
     }
 
     @Override
     public Object[] computeTraversal(TraversalType traversalType) {
-        return new Object[0];
+        switch (traversalType) {
+            default:
+                return computeInorderTraversal();
+        }
+    }
+
+    private Object[] computeInorderTraversal() {
+        if (size == 0) {
+            return new Object[0];
+        }
+
+        Object[] elements = new Object[size];
+        int index = 0;
+
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            elements[index++] = currentNode.key;
+            currentNode = currentNode.right;
+        }
+
+        return elements;
     }
 
     private static class Node<T> {
