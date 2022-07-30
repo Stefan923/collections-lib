@@ -110,6 +110,8 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
         switch (traversalType) {
             case PREORDER:
                 return computePreorderTraversal();
+            case POSTORDER:
+                return computePostorderTraversal();
             default:
                 return computeInorderTraversal();
         }
@@ -148,6 +150,34 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
             }
             if (currentNode.left != null) {
                 nodes.push(currentNode.left);
+            }
+        }
+
+        return elements;
+    }
+
+    private Object[] computePostorderTraversal() {
+        Object[] elements = new Object[size];
+        int index = 0;
+
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                if (currentNode.right != null) {
+                    nodes.push(currentNode.right);
+                }
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            if (!nodes.empty() && currentNode.right == nodes.peek()) {
+                nodes.pop();
+                nodes.push(currentNode);
+                currentNode = currentNode.right;
+            } else {
+                elements[index++] = currentNode.key;
+                currentNode = null;
             }
         }
 

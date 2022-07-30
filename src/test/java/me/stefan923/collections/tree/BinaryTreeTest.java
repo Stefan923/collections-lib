@@ -40,4 +40,14 @@ public class BinaryTreeTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testComputeTraversal_whenTraversalTypeIsPostorder() {
+        Integer[] expected = new Integer[]{ 5, 10, 30, 50, 40, 20 };
+        Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });
+
+        Integer[] actual = Arrays.stream(tree.computeTraversal(TraversalType.POSTORDER)).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
 }
