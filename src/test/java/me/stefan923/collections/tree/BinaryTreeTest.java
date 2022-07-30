@@ -1,0 +1,43 @@
+package me.stefan923.collections.tree;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+public class BinaryTreeTest {
+
+    @Test
+    public void testAdd() {
+        Integer[] expected = new Integer[]{ 10, 20, 30, 40 };
+        Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 10, 20, 40 });
+
+        tree.add(30);
+        Integer[] actual = Arrays.stream(tree.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testComputeTraversal_whenTraversalTypeIsInorder() {
+        Integer[] expected = new Integer[]{ 5, 10, 20, 30, 40, 50 };
+        Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });
+
+        Integer[] actual = Arrays.stream(tree.computeTraversal(TraversalType.INORDER)).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testComputeTraversal_whenTraversalTypeIsPreorder() {
+        Integer[] expected = new Integer[]{ 20, 10, 5, 40, 30, 50 };
+        Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });
+
+        Integer[] actual = Arrays.stream(tree.computeTraversal(TraversalType.PREORDER)).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+}
