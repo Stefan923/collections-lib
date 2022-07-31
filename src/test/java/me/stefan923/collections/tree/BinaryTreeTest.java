@@ -33,6 +33,17 @@ public class BinaryTreeTest {
     }
 
     @Test
+    public void testRemove() {
+        Integer[] expected = new Integer[]{ 10, 30, 40, 50, 60, 70 };
+        Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 50, 20, 10, 40, 30, 60, 70 });
+
+        tree.remove(20);
+        Integer[] actual = Arrays.stream(tree.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testComputeTraversal_whenTraversalTypeIsInorder() {
         Integer[] expected = new Integer[]{ 5, 10, 20, 30, 40, 50 };
         Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });

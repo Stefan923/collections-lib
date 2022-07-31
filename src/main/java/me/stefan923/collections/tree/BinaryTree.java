@@ -68,6 +68,56 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public boolean remove(E element) {
+        Node<E> currentNode = root;
+        Node<E> parentNode = null;
+        while (currentNode != null && currentNode.key != element) {
+            parentNode = currentNode;
+            if (currentNode.key != null && currentNode.key.compareTo(element) > 0) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
+
+        if (currentNode != null) {
+            if (currentNode.left == null) {
+                if (parentNode == null) {
+                    root = currentNode.right;
+                } else {
+                    if (parentNode.left == currentNode) {
+                        parentNode.left = currentNode.right;
+                    } else {
+                        parentNode.right = currentNode.right;
+                    }
+                }
+            } else if (currentNode.right == null) {
+                if (parentNode == null) {
+                    root = currentNode.left;
+                } else {
+                    if (parentNode.left == currentNode) {
+                        parentNode.left = currentNode.left;
+                    } else {
+                        parentNode.right = currentNode.left;
+                    }
+                }
+            } else {
+                Node<E> leftmostParentNode = currentNode;
+                Node<E> leftmostNode = currentNode.right;
+                while (leftmostNode.left != null) {
+                    leftmostParentNode = leftmostNode;
+                    leftmostNode = leftmostNode.left;
+                }
+                currentNode.key = leftmostNode.key;
+                if (leftmostParentNode == currentNode) {
+                    leftmostParentNode.right = null;
+                } else {
+                    leftmostParentNode.left = null;
+                }
+            }
+            --size;
+            return true;
+        }
+
         return false;
     }
 
@@ -193,7 +243,7 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
         private Node<T> left;
         private Node<T> right;
-        private final T key;
+        private T key;
 
         private Node(T key) {
             this.key = key;
