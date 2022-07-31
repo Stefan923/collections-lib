@@ -3,9 +3,7 @@ package me.stefan923.collections.tree;
 import me.stefan923.collections.Collection;
 
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.function.Predicate;
 
 public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
