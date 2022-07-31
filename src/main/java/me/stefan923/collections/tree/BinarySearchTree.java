@@ -121,7 +121,21 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public void clear() {
-
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            Node<E> rightChild = currentNode.right;
+            currentNode.left = null;
+            currentNode.right = null;
+            currentNode = rightChild;
+        }
+        root = null;
+        size = 0;
     }
 
     @Override

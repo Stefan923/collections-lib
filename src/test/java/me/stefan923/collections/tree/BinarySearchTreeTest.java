@@ -44,6 +44,17 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void testClear() {
+        Integer[] expected = new Integer[]{};
+        Tree<Integer> tree = new BinarySearchTree<>(new Integer[]{ 50, 20, 10, 40, 30, 60, 70 });
+
+        tree.clear();
+        Integer[] actual = Arrays.stream(tree.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testSize() {
         int expected = 6;
         Tree<Integer> tree = new BinarySearchTree<>(new Integer[]{ 10, 20, 70, 40, 30, 15 });
