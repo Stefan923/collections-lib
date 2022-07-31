@@ -58,7 +58,12 @@ public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public boolean addAll(Collection<E> collection) {
-        return false;
+        for (Object element : collection.toArray()) {
+            if (!add((E) element)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

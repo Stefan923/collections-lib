@@ -21,6 +21,18 @@ public class BinaryTreeTest {
     }
 
     @Test
+    public void testAddAll() {
+        Integer[] expected = new Integer[]{ 10, 20, 30, 40, 50, 60, 70, 80};
+        Tree<Integer> tree1 = new BinaryTree<>(new Integer[]{ 10, 30, 70, 20 });
+        Tree<Integer> tree2 = new BinaryTree<>(new Integer[]{ 60, 40, 50, 80 });
+
+        tree1.addAll(tree2);
+        Integer[] actual = Arrays.stream(tree1.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testComputeTraversal_whenTraversalTypeIsInorder() {
         Integer[] expected = new Integer[]{ 5, 10, 20, 30, 40, 50 };
         Tree<Integer> tree = new BinaryTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });
