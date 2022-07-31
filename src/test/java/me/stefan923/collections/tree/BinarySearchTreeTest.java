@@ -75,6 +75,16 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void testFindLast() {
+        int expected = 100;
+        Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+
+        int actual = integers.findLast(e -> e > 50).orElse(0);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void testComputeTraversal_whenTraversalTypeIsInorder() {
         Integer[] expected = new Integer[]{ 5, 10, 20, 30, 40, 50 };
         Tree<Integer> tree = new BinarySearchTree<>(new Integer[]{ 20, 40, 10, 5, 30, 50 });

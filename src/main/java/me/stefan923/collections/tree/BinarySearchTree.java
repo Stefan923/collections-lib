@@ -163,7 +163,22 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public Optional<E> findLast(Predicate<E> predicate) {
-        return Optional.empty();
+        Node<E> lastFoundNode = null;
+
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            if (predicate.test(currentNode.key)) {
+                lastFoundNode = currentNode;
+            }
+            currentNode = currentNode.right;
+        }
+        return lastFoundNode != null ? Optional.of(lastFoundNode.key) : Optional.empty();
     }
 
     @Override
