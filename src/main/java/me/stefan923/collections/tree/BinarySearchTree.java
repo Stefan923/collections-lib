@@ -126,7 +126,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override

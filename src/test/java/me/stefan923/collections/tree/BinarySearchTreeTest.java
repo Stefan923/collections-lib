@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BinarySearchTreeTest {
 
@@ -40,6 +41,16 @@ public class BinarySearchTreeTest {
         Integer[] actual = Arrays.stream(tree.toArray()).toArray(Integer[]::new);
 
         assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testSize() {
+        int expected = 6;
+        Tree<Integer> tree = new BinarySearchTree<>(new Integer[]{ 10, 20, 70, 40, 30, 15 });
+
+        int actual = tree.size();
+
+        assertEquals(expected, actual);
     }
 
     @Test
