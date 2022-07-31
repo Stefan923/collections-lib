@@ -6,17 +6,17 @@ import java.util.Optional;
 import java.util.Stack;
 import java.util.function.Predicate;
 
-public class BinaryTree<E extends Comparable<E>> implements Tree<E> {
+public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     private Node<E> root;
     private int size;
 
-    public BinaryTree() {
+    public BinarySearchTree() {
         root = null;
         size = 0;
     }
 
-    public BinaryTree(E[] elements) {
+    public BinarySearchTree(E[] elements) {
         for (E element : elements) {
             add(element);
         }
