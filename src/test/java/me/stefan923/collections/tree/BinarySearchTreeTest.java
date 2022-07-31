@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class BinarySearchTreeTest {
 
@@ -82,6 +82,24 @@ public class BinarySearchTreeTest {
         int actual = integers.findLast(e -> e > 50).orElse(0);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testHas_whenTrue() {
+        Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+
+        boolean actual = integers.has(60);
+
+        assertTrue(actual);
+    }
+
+    @Test
+    public void testHas_whenFalse() {
+        Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+
+        boolean actual = integers.has(50);
+
+        assertFalse(actual);
     }
 
     @Test

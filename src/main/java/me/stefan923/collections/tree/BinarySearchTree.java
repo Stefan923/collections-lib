@@ -188,6 +188,17 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public boolean has(E element) {
+        Node<E> currentNode = root;
+        while (currentNode != null) {
+            if (currentNode.key == element) {
+                return true;
+            }
+            if (currentNode.key != null && currentNode.key.compareTo(element) > 0) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
         return false;
     }
 
