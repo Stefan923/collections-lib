@@ -1,5 +1,7 @@
 package me.stefan923.collections.tree;
 
+import me.stefan923.collections.list.LinkedList;
+import me.stefan923.collections.list.List;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -60,6 +62,16 @@ public class BinarySearchTreeTest {
         Tree<Integer> tree = new BinarySearchTree<>(new Integer[]{ 10, 20, 70, 40, 30, 15 });
 
         int actual = tree.size();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFindFirst() {
+        int expected = 60;
+        Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
+
+        int actual = integers.findFirst(e -> e > 50).orElse(0);
 
         assertEquals(expected, actual);
     }

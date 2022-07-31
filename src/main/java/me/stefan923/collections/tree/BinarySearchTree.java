@@ -145,6 +145,19 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public Optional<E> findFirst(Predicate<E> predicate) {
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            if (predicate.test(currentNode.key)) {
+                return Optional.of(currentNode.key);
+            }
+            currentNode = currentNode.right;
+        }
         return Optional.empty();
     }
 
