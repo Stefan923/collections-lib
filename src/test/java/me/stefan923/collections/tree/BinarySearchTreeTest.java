@@ -1,7 +1,5 @@
 package me.stefan923.collections.tree;
 
-import me.stefan923.collections.list.LinkedList;
-import me.stefan923.collections.list.List;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
