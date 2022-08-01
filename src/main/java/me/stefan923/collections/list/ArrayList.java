@@ -124,8 +124,8 @@ public class ArrayList<E> implements List<E> {
     protected E removeLast() {
         E removedElement = null;
         if (size > 0) {
-            removedElement = (E) elements[size];
-            elements[size--] = null;
+            removedElement = (E) elements[--size];
+            elements[size] = null;
         }
         return removedElement;
     }
