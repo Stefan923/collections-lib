@@ -19,7 +19,7 @@ public class ArrayListStack<E> extends ArrayList<E> implements Stack<E> {
 
     @Override
     public E pop() {
-        return null;
+        return removeLast();
     }
 
     @Override
