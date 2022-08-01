@@ -85,6 +85,16 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void testFindAll() {
+        Integer[] expected = new Integer[]{ 60, 70, 100 };
+        Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 60, 10, 40, 30, 100, 70 });
+
+        Integer[] actual = Arrays.stream(integers.findAll(e -> e > 50)).toArray(Integer[]::new);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void testHas_whenTrue() {
         Tree<Integer> integers = new BinarySearchTree<>(new Integer[]{ 10, 30, 60, 40, 70, 100 });
 

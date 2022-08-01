@@ -2,6 +2,7 @@ package me.stefan923.collections.tree;
 
 import me.stefan923.collections.Collection;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Stack;
 import java.util.function.Predicate;
@@ -183,7 +184,24 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public Object[] findAll(Predicate<E> predicate) {
-        return new Object[0];
+        Object[] elements = new Object[size];
+        int index = 0;
+
+        Stack<Node<E>> nodes = new Stack<>();
+        Node<E> currentNode = root;
+        while (currentNode != null || !nodes.isEmpty()) {
+            while (currentNode != null) {
+                nodes.push(currentNode);
+                currentNode = currentNode.left;
+            }
+            currentNode = nodes.pop();
+            if (predicate.test(currentNode.key)) {
+                elements[index++] = currentNode.key;
+            }
+            currentNode = currentNode.right;
+        }
+
+        return Arrays.copyOf(elements, index);
     }
 
     @Override
