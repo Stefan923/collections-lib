@@ -130,6 +130,13 @@ public class ArrayList<E> implements List<E> {
         return removedElement;
     }
 
+    protected E getLast() {
+        if (size > 0) {
+            return (E) elements[size - 1];
+        }
+        return null;
+    }
+
     private void ensureCapacity(int minCapacity) {
         if (minCapacity > elements.length) {
             growCapacity(minCapacity + (minCapacity >> 1));
