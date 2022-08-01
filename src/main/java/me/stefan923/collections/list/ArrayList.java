@@ -59,7 +59,6 @@ public class ArrayList<E> implements List<E> {
                 }
             }
         }
-
         return false;
     }
 
@@ -120,6 +119,15 @@ public class ArrayList<E> implements List<E> {
     @SuppressWarnings("unchecked")
     public void sort(Comparator<? super E> comparator) {
         Arrays.sort((E[]) elements, 0, size, comparator);
+    }
+
+    protected E removeLast() {
+        E removedElement = null;
+        if (size > 0) {
+            removedElement = (E) elements[size];
+            elements[size--] = null;
+        }
+        return removedElement;
     }
 
     private void ensureCapacity(int minCapacity) {
