@@ -24,6 +24,6 @@ public class ArrayListStack<E> extends ArrayList<E> implements Stack<E> {
 
     @Override
     public E peek() {
-        return null;
+        return getLast();
     }
 }

@@ -35,6 +35,19 @@ public class ArrayListStackTest {
     }
 
     @Test
+    public void testPeek() {
+        Integer[] expectedStack = new Integer[]{ 10, 20, 40, 30, 50 };
+        int expectedPoppedElement = 50;
+        Stack<Integer> stack = new ArrayListStack<>(new Integer[]{ 10, 20, 40, 30, 50 });
+
+        int actualPoppedElement = stack.peek();
+        Integer[] actualStack = Arrays.stream(stack.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expectedStack, actualStack);
+        assertEquals(expectedPoppedElement, actualPoppedElement);
+    }
+
+    @Test
     public void testAdd() {
         Integer[] expected = new Integer[]{ 10, 20, 40, 30 };
         Stack<Integer> stack = new ArrayListStack<>(new Integer[]{ 10, 20, 40 });
