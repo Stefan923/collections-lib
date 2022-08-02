@@ -22,6 +22,12 @@ public class ArrayList<E> implements List<E> {
         size = 0;
     }
 
+    public ArrayList(int capacity) {
+        int capacityToAllocate = Math.max(capacity, 0);
+        this.elements = new Object[capacityToAllocate];
+        size = 0;
+    }
+
     public ArrayList(E[] elements) {
         this.elements = Arrays.copyOf(elements, elements.length);
         size = elements.length;
@@ -121,6 +127,16 @@ public class ArrayList<E> implements List<E> {
         Arrays.sort((E[]) elements, 0, size, comparator);
     }
 
+    protected E removeFirst() {
+        E removedElement = null;
+        if (size > 0) {
+            removedElement = (E) elements[0];
+            System.arraycopy(elements, 1, elements, 0, elements.length - 1);
+            elements[--size] = null;
+        }
+        return removedElement;
+    }
+
     protected E removeLast() {
         E removedElement = null;
         if (size > 0) {
@@ -128,6 +144,13 @@ public class ArrayList<E> implements List<E> {
             elements[size] = null;
         }
         return removedElement;
+    }
+
+    protected E getFirst() {
+        if (size > 0) {
+            return (E) elements[0];
+        }
+        return null;
     }
 
     protected E getLast() {
