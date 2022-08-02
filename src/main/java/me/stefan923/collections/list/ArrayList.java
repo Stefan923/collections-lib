@@ -127,6 +127,16 @@ public class ArrayList<E> implements List<E> {
         Arrays.sort((E[]) elements, 0, size, comparator);
     }
 
+    protected E removeFirst() {
+        E removedElement = null;
+        if (size > 0) {
+            removedElement = (E) elements[0];
+            System.arraycopy(elements, 1, elements, 0, elements.length - 1);
+            elements[--size] = null;
+        }
+        return removedElement;
+    }
+
     protected E removeLast() {
         E removedElement = null;
         if (size > 0) {
