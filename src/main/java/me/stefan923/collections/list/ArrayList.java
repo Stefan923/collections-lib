@@ -22,6 +22,11 @@ public class ArrayList<E> implements List<E> {
         size = 0;
     }
 
+    public ArrayList(int size) {
+        this.size = Math.max(size, 0);
+        this.elements = new Object[this.size];
+    }
+
     public ArrayList(E[] elements) {
         this.elements = Arrays.copyOf(elements, elements.length);
         size = elements.length;
