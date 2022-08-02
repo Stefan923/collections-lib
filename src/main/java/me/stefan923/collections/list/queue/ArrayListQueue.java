@@ -24,7 +24,7 @@ public class ArrayListQueue<E> extends ArrayList<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        return null;
+        return getFirst();
     }
 
 }
