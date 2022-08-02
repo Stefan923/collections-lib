@@ -22,6 +22,19 @@ public class ArrayListQueueTest {
     }
 
     @Test
+    public void testPop() {
+        Integer[] expectedQueue = new Integer[]{ 20, 40, 30, 50 };
+        int expectedPoppedElement = 10;
+        Queue<Integer> queue = new ArrayListQueue<>(new Integer[]{ 10, 20, 40, 30, 50 });
+
+        int actualPoppedElement = queue.pop();
+        Integer[] actualQueue = Arrays.stream(queue.toArray()).toArray(Integer[]::new);
+
+        assertArrayEquals(expectedQueue, actualQueue);
+        assertEquals(expectedPoppedElement, actualPoppedElement);
+    }
+
+    @Test
     public void testAdd() {
         Integer[] expected = new Integer[]{ 10, 20, 40, 30 };
         Queue<Integer> queue = new ArrayListQueue<>(new Integer[]{ 10, 20, 40 });

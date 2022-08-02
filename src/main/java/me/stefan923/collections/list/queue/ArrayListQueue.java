@@ -19,7 +19,7 @@ public class ArrayListQueue<E> extends ArrayList<E> implements Queue<E> {
 
     @Override
     public E pop() {
-        return null;
+        return removeFirst();
     }
 
     @Override
