@@ -22,9 +22,10 @@ public class ArrayList<E> implements List<E> {
         size = 0;
     }
 
-    public ArrayList(int size) {
-        this.size = Math.max(size, 0);
-        this.elements = new Object[this.size];
+    public ArrayList(int capacity) {
+        int capacityToAllocate = Math.max(capacity, 0);
+        this.elements = new Object[capacityToAllocate];
+        size = 0;
     }
 
     public ArrayList(E[] elements) {
