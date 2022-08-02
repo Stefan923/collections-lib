@@ -146,6 +146,13 @@ public class ArrayList<E> implements List<E> {
         return removedElement;
     }
 
+    protected E getFirst() {
+        if (size > 0) {
+            return (E) elements[0];
+        }
+        return null;
+    }
+
     protected E getLast() {
         if (size > 0) {
             return (E) elements[size - 1];
