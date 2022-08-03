@@ -24,6 +24,13 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean remove(K key) {
+        for (int i = 0; i < elements.length; ++i) {
+            int index = (key.hashCode() + i) % elements.length;
+            if (elements[index] == null) {
+                elements[index] = null;
+                return true;
+            }
+        }
         return false;
     }
 
