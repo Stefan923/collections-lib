@@ -46,7 +46,13 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean get(K key) {
-        return false;
+    public V get(K key) {
+        for (int i = 0; i < elements.length; ++i) {
+            int index = (key.hashCode() + i) % elements.length;
+            if (elements[index] != null) {
+                return (V) elements[index];
+            }
+        }
+        return null;
     }
 }
