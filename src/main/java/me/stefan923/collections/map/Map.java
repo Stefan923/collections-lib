@@ -1,7 +1,5 @@
 package me.stefan923.collections.map;
 
-import me.stefan923.collections.Collection;
-
 public interface Map<K, V> {
 
     boolean put(K key, V value);
