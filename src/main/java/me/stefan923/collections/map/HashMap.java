@@ -1,5 +1,7 @@
 package me.stefan923.collections.map;
 
+import java.util.Optional;
+
 public class HashMap<K, V> implements Map<K, V> {
 
     private static final int MAX_ARRAY_CAPACITY = Integer.MAX_VALUE - 8;
@@ -46,13 +48,13 @@ public class HashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(K key) {
+    public Optional<V> get(K key) {
         for (int i = 0; i < elements.length; ++i) {
             int index = (key.hashCode() + i) % elements.length;
             if (elements[index] != null) {
-                return (V) elements[index];
+                return Optional.of((V) elements[index]);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
