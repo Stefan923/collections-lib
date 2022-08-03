@@ -26,7 +26,7 @@ public class HashMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         for (int i = 0; i < elements.length; ++i) {
             int index = (key.hashCode() + i) % elements.length;
-            if (elements[index] == null) {
+            if (elements[index] != null) {
                 elements[index] = null;
                 return true;
             }
@@ -36,6 +36,12 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean has(K key) {
+        for (int i = 0; i < elements.length; ++i) {
+            int index = (key.hashCode() + i) % elements.length;
+            if (elements[index] != null) {
+                return true;
+            }
+        }
         return false;
     }
 
