@@ -8,16 +8,26 @@ public class HashMap<K, V> implements Map<K, V> {
 
     private static final int DEFAULT_SIZE = 100;
 
-    private Object[] elements;
+    private final Node[] elements;
 
     private int size;
 
+    public HashMap(int size) {
+        this.size = size;
+        this.elements = new Node[size];
+    }
+
+    public HashMap() {
+        this(DEFAULT_SIZE);
+    }
+
     @Override
     public boolean put(K key, V value) {
-        for (int i = 0; i < elements.length; ++i) {
-            int index = (key.hashCode() + i) % elements.length;
+        int hashCode = (key.hashCode() & Integer.MAX_VALUE) % size;
+        for (int i = 0; i < size; ++i) {
+            int index = (hashCode + i) % size;
             if (elements[index] == null) {
-                elements[index] = value;
+                elements[index] = new Node<>(hashCode, key, value);
                 return true;
             }
         }
@@ -26,9 +36,10 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean remove(K key) {
-        for (int i = 0; i < elements.length; ++i) {
-            int index = (key.hashCode() + i) % elements.length;
-            if (elements[index] != null) {
+        int hashCode = (key.hashCode() & Integer.MAX_VALUE) % size;
+        for (int i = 0; i < size; ++i) {
+            int index = (hashCode + i) % size;
+            if (elements[index] != null && elements[index].getHashCode() == hashCode) {
                 elements[index] = null;
                 return true;
             }
@@ -38,9 +49,10 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public boolean has(K key) {
-        for (int i = 0; i < elements.length; ++i) {
-            int index = (key.hashCode() + i) % elements.length;
-            if (elements[index] != null) {
+        int hashCode = (key.hashCode() & Integer.MAX_VALUE) % size;
+        for (int i = 0; i < size; ++i) {
+            int index = (hashCode + i) % size;
+            if (elements[index] != null && elements[index].getHashCode() == hashCode) {
                 return true;
             }
         }
@@ -49,10 +61,11 @@ public class HashMap<K, V> implements Map<K, V> {
 
     @Override
     public Optional<V> get(K key) {
-        for (int i = 0; i < elements.length; ++i) {
-            int index = (key.hashCode() + i) % elements.length;
-            if (elements[index] != null) {
-                return Optional.of((V) elements[index]);
+        int hashCode = (key.hashCode() & Integer.MAX_VALUE) % size;
+        for (int i = 0; i < size; ++i) {
+            int index = (hashCode + i) % size;
+            if (elements[index] != null && elements[index].getHashCode() == hashCode) {
+                return Optional.of((V) elements[index].getValue());
             }
         }
         return Optional.empty();
